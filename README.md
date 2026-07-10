@@ -1,6 +1,6 @@
 ## To Run
 
-Install mise and run 
+Install [mise](https://mise.jdx.dev/getting-started.html)(`brew install mise`) and run 
 
 `mise trust && mise install && mise run dev`
 

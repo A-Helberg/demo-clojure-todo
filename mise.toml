@@ -3,6 +3,7 @@ java = "temurin-21"
 clojure = "latest"
 node = "22"
 overmind = "latest"
+tmux = "latest"
 
 
 
