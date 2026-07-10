@@ -1,3 +1,9 @@
+## To Run
+
+Install mise and run 
+
+`mise trust && mise install && mise run dev`
+
 # todos — a full-stack Clojure app, end to end
 
 The lessons in this repo show Clojure ideas in isolation. This is the other
