@@ -1,0 +1,6 @@
+;; Kaocha configuration — like everything else here, the test runner's
+;; config is plain data.
+#kaocha/v1
+{:tests [{:id           :unit
+          :test-paths   ["test"]
+          :source-paths ["src/clj"]}]}

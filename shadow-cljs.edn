@@ -1,0 +1,15 @@
+;; ClojureScript build config. Dependencies come from deps.edn (:cljs alias),
+;; so there is a single place where versions live.
+{:deps {:aliases [:cljs]}
+
+ ;; Dev server: serves the compiled app on :8280 with hot reload, and
+ ;; proxies everything else (i.e. /api/*) to the backend on :3000 —
+ ;; same-origin in development, no CORS required.
+ :dev-http {8280 {:root "resources/public"
+                  :proxy-url "http://localhost:3000"}}
+
+ :builds
+ {:app {:target :browser
+        :output-dir "resources/public/js"
+        :asset-path "/js"
+        :modules {:main {:init-fn todo.ui.core/init}}}}}

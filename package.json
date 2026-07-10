@@ -1,0 +1,11 @@
+{
+  "name": "todo-app",
+  "private": true,
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "shadow-cljs": "^2.28.20",
+    "tailwindcss": "^4.1.0"
+  }
+}

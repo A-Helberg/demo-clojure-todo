@@ -1,0 +1,58 @@
+[tools]
+java = "temurin-21"
+clojure = "latest"
+node = "22"
+overmind = "latest"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[tasks.dev]
+description = "Everything at once via overmind (Procfile) — then open http://localhost:8280"
+run = "overmind start"
+
+[tasks.setup]
+description = "Install JS tooling (shadow-cljs, react, tailwind)"
+run = "npm install"
+
+[tasks.dev-server]
+description = "API server on http://localhost:3000 + nREPL on 7888 for your editor"
+run = "clojure -M:dev:test -m dev"
+
+[tasks.dev-client]
+description = "shadow-cljs watch: recompile ClojureScript on save, hot-reload the browser"
+run = "npx shadow-cljs watch app"
+
+[tasks.dev-css]
+description = "Tailwind watch: rebuild CSS when classes appear in the cljs source"
+run = "npx @tailwindcss/cli -i src/css/app.css -o resources/public/css/app.css --watch"
+
+[tasks.build]
+description = "Production build: minified CSS + advanced-compiled JS into resources/public"
+run = [
+  "npx @tailwindcss/cli -i src/css/app.css -o resources/public/css/app.css --minify",
+  "npx shadow-cljs release app",
+]
+
+[tasks.prod]
+description = "Serve the production build on :3000 (run `mise run build` first)"
+run = "clojure -M -m todo.server.main"
+
+[tasks.test]
+description = "Backend tests via kaocha: in-memory Datomic, no network"
+run = "clojure -M:test"
+
+[tasks.test-watch]
+description = "Kaocha watch mode: rerun affected tests on every save"
+run = "clojure -M:test --watch"

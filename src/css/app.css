@@ -1,0 +1,6 @@
+@import "tailwindcss" source(none);
+
+/* Tailwind scans these for class names — hiccup keywords and strings in
+   ClojureScript source work exactly like class attributes in JSX. */
+@source "../cljs";
+@source "../../resources/public/index.html";

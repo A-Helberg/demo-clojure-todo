@@ -1,0 +1,15 @@
+node_modules/
+data/
+.cpcache/
+.shadow-cljs/
+.nrepl-port
+resources/public/js/
+resources/public/css/
+package-lock.json
+.overmind.sock
+
+.cpcache
+.tieped-cache
+.lsp
+.clj-kondo
+

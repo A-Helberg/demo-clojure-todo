@@ -1,0 +1,61 @@
+{:paths ["src/clj" "src/cljc" "resources"]
+
+ :deps
+ {org.clojure/clojure {:mvn/version "1.12.1"}
+
+  ;; Datomic, embedded ("datomic-local"): durable storage on disk, full
+  ;; history, no separate database process to run.
+  com.datomic/local {:mvn/version "1.0.291"}
+
+  ;; HTTP: ring is the servlet abstraction, reitit the data-driven router.
+  ring/ring-core {:mvn/version "1.13.0"}
+  ring/ring-jetty-adapter {:mvn/version "1.13.0"}
+  metosin/reitit {:mvn/version "0.7.2"}
+
+  ;; malli validates every edge: requests in, responses out, third-party JSON.
+  metosin/malli {:mvn/version "0.17.0"}
+
+  ;; Content negotiation + JSON.
+  metosin/muuntaja {:mvn/version "0.6.10"}
+  metosin/jsonista {:mvn/version "0.3.13"}
+
+  ;; Password hashing (bcrypt).
+  buddy/buddy-hashers {:mvn/version "2.0.167"}
+
+  ;; Lifecycle / dependency wiring for the system map.
+  integrant/integrant {:mvn/version "0.13.1"}
+
+  org.slf4j/slf4j-simple {:mvn/version "2.0.16"}}
+
+ :aliases
+ {;; REPL-driven development: (go), change code, (reset), (run-tests).
+  ;; Includes the test dir + deps so the suite runs from the REPL, and
+  ;; nREPL so the Procfile's server process is connectable from an editor.
+  :dev
+  {:extra-paths ["dev" "test"]
+   :extra-deps {integrant/repl {:mvn/version "0.4.0"}
+                nrepl/nrepl {:mvn/version "1.3.1"}
+                cider/cider-nrepl {:mvn/version "0.50.2"}
+                ring/ring-mock {:mvn/version "0.4.0"}}}
+
+  ;; ClojureScript build deps — used by shadow-cljs (see shadow-cljs.edn).
+  :cljs
+  {:extra-paths ["src/cljs" "src/cljc"]
+   :extra-deps {thheller/shadow-cljs {:mvn/version "2.28.20"}
+                reagent/reagent {:mvn/version "1.2.0"}
+                ;; Chrome custom formatters: cljs data prints as cljs data in
+                ;; the devtools console. shadow-cljs auto-preloads this in dev
+                ;; builds and strips it from release builds.
+                binaryage/devtools {:mvn/version "1.0.7"}}}
+
+  ;; Test paths + kaocha. Still composes with other aliases: an explicit
+  ;; -m on the command line overrides :main-opts, so the dev server's
+  ;; -M:dev:test -m dev keeps working. To run tests from a shell:
+  ;;   clj -M:test                                  (mise run test)
+  ;;   clj -M:test --watch                          (mise run test-watch)
+  ;;   clj -M:test --focus todo.server.api-test
+  :test
+  {:extra-paths ["test"]
+   :extra-deps {lambdaisland/kaocha {:mvn/version "1.91.1392"}
+                ring/ring-mock {:mvn/version "0.4.0"}}
+   :main-opts ["-m" "kaocha.runner"]}}}
